@@ -1,0 +1,21 @@
+dic={}
+def scramle(s1,s2):
+    n=len(s1)
+    if (s1,s2) in dic:
+        return dic[(s1,s2)]
+    if len(s1) != len(s2) or sorted(s1) != sorted(s2):
+        dic[(s1,s2)]=False
+        return False
+    if s1 == s2:
+        dic[(s1,s2)]=True
+        return True
+    for i in range(1,n):
+        if (scramle(s1[i:],s2[i:]) and scramle(s1[:i],s2[:i])) or(scramle(s1[:i],s2[-i:]) and scramle(s1[i:],s2[:-i])):
+            dic[(s1,s2)]=True
+            return True
+    dic[(s1,s2)]=False
+    return False
+#     print(dic)
+s1=input()
+s2=input()
+scramle(s1,s2)
