@@ -1,0 +1,16 @@
+import sys
+def mcm(arr,i,j):
+    if i==j:
+        return 0
+    if t[i][j] !=-1:
+        return t[i][j]
+    t[i][j]=sys.maxsize
+    for k in range(i,j):
+        t[i][j]=min(t[i][j],mcm(arr,i,k)+mcm(arr,k+1,j)+arr[i-1]*arr[k]*arr[j])
+    return t[i][j]
+arr=list(map(int,input().split()))
+n=len(arr)
+i=1
+j=len(arr)-1
+t=[[-1 for i in range(n+1)] for j in range(n+1)]
+mcm(arr,i,j)
