@@ -1,0 +1,39 @@
+def exp2(str1,i,j,bol):
+    
+    if i > j:
+        return True
+    
+    if i == j:
+        if bol == True:
+            return str1[i]=="T"
+        else:
+            return str1[i]=="F"
+    ans=0
+    
+    for k in range(i+1,j,2):
+        
+        lt=exp2(str1,i,k-1,True)
+        lf=exp2(str1,i,k-1,False)
+        rt=exp2(str1,k+1,j,True)
+        rf=exp2(str1,k+1,j,False)
+        
+        if str1[k]=="&":
+            if bol==True:
+                ans+=lt*rt
+            else:
+                ans+= lt*rf+lf*rt+lf*rf
+                
+                
+        elif str1[k]=="|":
+            if bol==True:
+                ans+=lt*rf+lf*rt+lt*rt
+            else:
+                ans+=lf*rf
+                
+        elif str1[k]=="^":
+            if bol==True:
+                ans+=lt*rf+lf*rt
+            else:
+                ans+=lt*rt+lf*rf
+                
+    return ans
