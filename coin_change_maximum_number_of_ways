@@ -1,0 +1,19 @@
+def maxway(coin,amt,m):
+    t=[[0 for  i in range(amt+1)] for j in range(m+1)]
+    
+    for i in range(m+1):
+        t[i][0]= True
+    for i in range(1,amt+1):
+        t[0][i]=False
+    
+    for i in range(1,m+1):
+        for j in range(1,amt+1):
+            if coin[i-1] <= j:
+                t[i][j]=t[i][j-coin[i-1]]+t[i-1][j]
+            else:
+                t[i][j]=t[i-1][j]
+    return t[m][amt]
+coin=list(map(int,input().split()))
+amt=int(input())
+m=len(coin)
+maxway(coin,amt,m)
